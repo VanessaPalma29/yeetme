@@ -124,17 +124,41 @@
 
              function displayResponseInHtml(response) {
                  counterContainer.text(`Kommentare vom Backend: ${response.data.length}`)
+                 kommentarContainer.empty()
 
                  response.data.forEach((kommentar, index) => {
+                    let deleteButton = $('<button>delete</button>')
+                            .click(() => {
+                                axios.delete(`${backendUrl}/${kommentar._id}`)
+                                    .then(response => {
+                                        kommentarContainer.empty()
+                                        displayResponseInHtml(response)
+                                    })
+                            })
+
+                        let likeButton = $('<button>like</button>')
+                            .click(() => {
+                                axios.put(`${backendUrl}/${kommentar._id}`)
+                                    .then(response => {
+                                        kommentarContainer.empty()
+                                        displayResponseInHtml(response)
+                                    })
+                            })
                      if(index > 25) {
                     counterContainer.removeClass('lila')
                     counterContainer.addClass('pink')
                     kommentarContainer.append(`<div class="pink">${kommentar.greeting}</div>`)
                     kommentarContainer.append(`<div>${kommentar.user}</div>`)
+                    kommentarContainer.append(`<div>${kommentar.likes}</div>`)
+                    .append(likeButton)
+                    .append(deleteButton)
                 }
                 else{
                     kommentarContainer.append(`<div class="kommentare">${kommentar.greeting} hat gesagt: </div>`)
                     kommentarContainer.append(`<div>${kommentar.user}</div>`)
+                    kommentarContainer.append(`<div>${kommentar.likes}</div>`)
+                    .append(likeButton)
+                    .append(deleteButton)
                 }
              })}
 
