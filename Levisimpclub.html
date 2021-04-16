@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="http://lolfilter.com/files/thumbnails/4869231845085256.png">
+        <title>
+            IchmachmichvomAckerman
+        </title>
+        <style>
+            h1 {
+                color: blueviolet;
+                font-family: monospace;
+                font-size: xx-large;
+                background-color: black;
+                border: 6px ridge rgba(245, 32, 139, 0.774);
+                letter-spacing: 7px;
+                font-family:"voltec";
+            }
+            .dritte {
+                background-color: rgb(26, 156, 117);
+                border-color:  rgb(40, 197, 150);
+            }
+
+            .dritte:hover{
+                color:  rgb(3, 248, 175); ;
+            }
+            .button-base {
+                border-radius: 7px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                margin: 20px;
+                font-family:"voltec";
+                letter-spacing: 7px;
+            }
+            .primary {
+                background-color: rgb(163, 111, 170);
+                border-color: rgb(175, 99, 252);
+
+            }
+            .primary:hover {
+                color: violet;
+            }
+
+            .secondary {
+                background-color: rgb(175, 44, 44);
+                border-color: rgb(255, 0, 0);
+            }
+            .secondary:hover {
+                color: rgba(155, 21, 21, 0.884);
+            }
+            
+        table, th, td {
+            border: 2px solid rgba(245, 32, 139, 0.774);
+            color: rgba(255, 255, 255, 0.904);
+            letter-spacing: 5px;
+        }
+            summary, ul, p {
+                font-size: x-large; 
+                color: rgb(255, 255, 255);
+            }
+            span {
+                color: rgb(255, 255, 255);
+                font-size: medium;
+            }
+            h1, h2, h3, marquee {
+                color: rgb(255, 255, 255);
+                font-family:"voltec";
+                letter-spacing: 7px;
+            }
+            table tr:nth-child(Odd){
+                background-color: rgb(0, 0, 0);
+
+            }
+            table tr:nth-child(even){
+                background-color: violet;
+            }  
+            @font-face {
+                font-family:"voltec";
+                src: url(Voltec-axgem.ttf);
+            }
+            
+            body{
+                width: 100%;
+                background-image: url(yeet.jpg);
+                background-size: cover;
+                background-repeat: no-repeat;
+                font-family:"voltec";
+            }
+            .lila{
+                background-color: rgb(121, 33, 202);
+                width: fit-content;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+            .pink{
+                background-color: rgb(224, 124, 255);
+                width: fit-content;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+            .Commentssection{
+                background-color: rgb(24, 79, 131);
+                letter-spacing: 5px;
+                border:6px ridge rgba(231, 24, 128, 0.774);
+            }
+        </style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <script>
+            $('document').ready(() => {
+             let meinButton = $('#meinbutton')
+             let kommentarContainer = $('#kommentarContainer')
+             let counterContainer = $('#kommentar-counter')
+             let textField = $('#text-field')
+             let name = $('#name')
+
+             counterContainer.text('Kommentare: 0')
+
+             let kommentarWurdeGeaded = false
+             let counter = 0
+
+             let backendUrl = 'https://simon-guesbook-backend.herokuapp.com/greetings/VanessaPalma'
+
+             function displayResponseInHtml(response) {
+                 counterContainer.text(`Kommentare vom Backend: ${response.data.length}`)
+
+                 response.data.forEach((kommentar, index) => {
+                     if(index > 25) {
+                    counterContainer.removeClass('lila')
+                    counterContainer.addClass('pink')
+                    kommentarContainer.append(`<div class="pink">${kommentar.greeting}</div>`)
+                    kommentarContainer.append(`<div>${kommentar.user}</div>`)
+                }
+                else{
+                    kommentarContainer.append(`<div class="kommentare">${kommentar.greeting} hat gesagt: </div>`)
+                    kommentarContainer.append(`<div>${kommentar.user}</div>`)
+                }
+             })}
+
+             axios.get(backendUrl)
+                .then(response => {
+                    displayResponseInHtml(response)
+                })
+
+            meinButton.text('Post')
+
+            meinButton.click(() => {
+                let aktuellerText = textField.val()
+                let Namenzeile = name.val()
+
+               let body = {
+                    greeting: aktuellerText,
+                    user: Namenzeile
+                }
+
+                axios.post(backendUrl,body)
+                .then(response => {
+                    displayResponseInHtml(response)
+                })
+
+
+                counter = counter + 1
+                counterContainer.text(`Kommentare: ${counter}`)
+            })
+        })
+        </script>
+    </head>
+    <body>
+       <h1> <center> Welcome to my Guestbook besto friendo </center></h1>
+    <a href="http://www.youtube.com/watch?v=Yy0NGzbZmbM">
+        <h2><center>Pure Comedy</center></h2>
+    </a>
+    <br>
+    <br>
+      <center><h2>About me</h2>
+       <h3>accurate Picture:</h3>
+       <img src="https://i.pinimg.com/originals/5f/ec/95/5fec9590fac5ec934fef792eaf348390.jpg" width="400" height="400">
+       <br>
+       <br>
+       <details> <summary>Things I like </summary><p> <ul>
+            <li>Anime</li>
+            <li>Food</li>
+            <li>Drawing</li>
+            <li>Art</li>
+            <li>Reading books</li>
+           </ul></p><br></details>
+           <br>
+           <br>
+       <details> <summary>Things I despise</summary>
+            <ul>
+            <li>Disrespectfull people</li>
+           </ul>
+        <p>Here a meme (งꗞロꗞ)ง </p><br><p><img src="https://i.redd.it/l4pwo111ld761.jpg" width="450" height="400"></p></details>
+       <div>
+           <br>
+           <br>
+        <input type="radio">
+        <span>Befriend Monkee</span>
+       </div>
+       <div>
+        <input type="radio">
+        <span>Get rid of Monkee</span>
+       </div>
+        <br>
+        <br>
+       <div>
+        <form action="formHandler.php" name="yourForm" id="theForm" method="post">    
+            <input type="text" name="fname" id="fname" />    
+            <input type="submit" value="submit"/>
+            <span>Your thoughts</span>
+        </form>
+        <br>
+        <br>
+        </div>
+    </center>
+       <br>
+       <br>
+       <marquee>Not Armin but still on fire  •  Not Armin but still on fire  •  Not Armin but still on fire  •  Not Armin but still on fire </marquee>
+       <br>
+       <br>
+        <br>
+        <br>
+        <br>
+        <center><iframe width="560" height="315" src="https://www.youtube.com/embed/y5JyUNrzkz8?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+<br>
+<div>
+    <center><button class="primary button-base" onclick="new Audio('Levi.mp3').play()">KENNYYY!!!</button>
+   <button class="secondary button-base" onclick="new Audio('Eren.mp3').play()">TATAKAE</button></center>
+</div>
+<center><h2 class="Commentssection">welcome to the comment section, have fun</h2></center>
+<br>
+<center>
+<input type="text" id="text-field"> <span><input type="text" id="name"></span>
+    <button id ="meinbutton" class="dritte button-base">Post</button>
+
+    <div id="kommentarContainer" class="lila">
+        keine kommentare bis jetzt
+    </div>
+
+    <div id="kommentar-counter"></div>
+<br>
+<Table>
+    <tr>
+        <th>oi</th>
+        <th>oi</th>
+    </tr>
+    <tr>
+        <td>oi</td>
+        <td>oi</td>
+    </tr>
+</Table></center>
+</body>
+</html>
